@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+/* Base styles */
+.product-details {
+    padding: 20px;
+}
+h1 {
+    margin-bottom: 3%;
+}
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+    margin: 0 auto;
+    max-width: 50%;
+}
+
+.product-image img {
+     /* Ensures image responsiveness */
+}
+
+.sale-price {
+    font-weight: bold;
+}
+
+.buttons {
+    margin-top: 10px;
+}
+
+.buttons .btn {
+    margin-right: 10px;
+}
+
+/* Styles for computers */
+@media screen and (min-width: 768px) {
+    .product-info {
+        flex-direction: row;
+        align-items: flex-start; /* Align items to the start horizontally */
+        text-align: left; /* Align text to the left */
+    }
+
+    .product-image {
+        margin-right: 20px;
+        max-width: 400px; /* Limit image size */
+    }
+
+    .product-description {
+        flex: 1;
+        margin-left: 30px/* Fill remaining space */
+    }
+}
+
+
+    </style>
+    <div class="product-details">
+        <h1>{{ product.name }}</h1>
+        <div class="product-info">
+            <div class="product-image">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 300px">
+            </div>
+            <div class="product-description">
+                <p>{{ product.description }}</p>
+                <p class="price"><strike>Price: ${{ product.price }}</strike></p>
+                {% if product.is_sale %}
+                    <p class="sale-price">Sale Price: ${{ product.sale_price }}</p>
+                {% endif %}
+                <div class="buttons">
+                    <button class="btn add-to-cart" value="{{ product.id }}" id="add-cart">Add to Cart</button>
+                    <a href="{% url 'home' %}" class="btn">Back to Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    $(document).on('click', '#add-cart', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart_add" %}',
+            data: {
+                product_id: $("#add-cart").val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+
+            success: function (json){
+                document.getElementById('cart_quantity').textContent = json.CartQuantity
+            },
+
+            error: function (xhr, errmsg, err){
+
+            }
+        });
+
+
+    })
+    </script>
+{% endblock %}

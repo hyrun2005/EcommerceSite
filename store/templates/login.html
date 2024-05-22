@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  /* CSS for form styling */
+  .form-container {
+    width: 90%; /* Set a width for the form container */
+    max-width: 400px; /* Maximum width for larger screens */
+    margin: 0 auto;
+  }
+
+  .form-control {
+    margin-bottom: 15px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  /* Media query for smaller screens */
+  @media (max-width: 576px) {
+    .form-container {
+      width: 100%; /* Set width to 100% for smaller screens */
+      max-width: none; /* Remove maximum width for smaller screens */
+    }
+  }
+</style>
+
+<div class="form-container"><br>
+<h2>Log In</h2>
+    <br>
+  <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Username</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username" >
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+</div>
+{% endblock %}

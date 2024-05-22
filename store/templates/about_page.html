@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        /* Common styles for both sections */
+        .container_about {
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            justify-content: center; /* Center items horizontally */
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 80%;
+        }
+
+        .container_about h1,
+        .container_about p {
+            margin-bottom: 20px;
+        }
+
+        /* Styles for the first block of each section */
+        .first_block_about,
+        .first_block_about2 {
+            flex: 1;
+            margin-right: 20px;
+            margin-bottom: 20px; /* Add space between blocks */
+        }
+
+        /* Styles for the second block of each section */
+        .second_block_about,
+        .second_block_about2 {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px; /* Add space between blocks */
+        }
+
+        .second_block_about img,
+        .second_block_about2 img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .container_about {
+                flex-direction: column; /* Stack items vertically */
+                align-items: center; /* Center items vertically */
+            }
+        }
+    </style>
+
+    <!-- About Section 1 -->
+    <section id="about" class="container_about">
+        <div class="first_block_about">
+            <h1>About Electronics Store</h1>
+            <p>Welcome to Electronics Store, your one-stop destination for all your electronic needs. We offer a wide range of electronic gadgets and accessories, including smartphones, laptops, cameras, and more.</p>
+            <p>At Electronics Store, we are committed to providing our customers with high-quality products at competitive prices. Our team carefully selects each product to ensure reliability, performance, and customer satisfaction.</p>
+            <p>Whether you're a tech enthusiast, a professional, or a casual user, you'll find something that meets your needs at Electronics Store. Explore our catalog and discover the latest innovations in electronics.</p>
+        </div>
+        <div class="second_block_about">
+            <img src="{% static 'img/what-is-ecommerce.svg' %}" alt="What is Ecommerce">
+        </div>
+    </section>
+
+    <!-- About Section 2 -->
+    <section id="about2" class="container_about">
+        <div class="first_block_about2">
+            <img src="{% static 'img/ecommerce-tools-for-a-successful-online-shop.svg' %}" alt="Ecommerce Tools">
+        </div>
+        <div class="second_block_about2">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        </div>
+    </section>
+{% endblock %}
