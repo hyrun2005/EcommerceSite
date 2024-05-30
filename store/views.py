@@ -30,10 +30,11 @@ def categories(request, foo):
             "products": product,
         }
         return render(request, 'categories.html', context=context)
-
     except:
         messages.info(request, 'Category is not found!!!')
         return redirect('home')
+
+
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
